@@ -35,6 +35,8 @@ cGame* cGame::getInstance()
 }
 
 
+
+
 void cGame::initialise(SDL_Window* theSDLWND, SDL_Renderer* theRenderer)
 {
 	// Get width and height of render context
@@ -292,6 +294,7 @@ void cGame::update(double deltaTime)
 
 	// Update the Rockets position
 	theRocket.update(deltaTime);
+	theRocket2.update(deltaTime);
 }
 
 bool cGame::getInput(bool theLoop)
