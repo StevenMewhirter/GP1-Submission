@@ -9,6 +9,7 @@ cRocket2.h
 #define _CROCKET_H
 #include "cSprite.h"
 
+
 class cRocket2 : public cSprite
 {
 private:

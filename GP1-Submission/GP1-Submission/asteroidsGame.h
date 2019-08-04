@@ -10,8 +10,9 @@
 #include "cAsteroid.h"
 #include "cBullet.h"
 #include "cRocket.h"
-#include "cRocket2.h"
+
 #include "cFontMgr.h"
 #include "cSoundMgr.h"
+#include "cRocket2.h"
 
 #endif
