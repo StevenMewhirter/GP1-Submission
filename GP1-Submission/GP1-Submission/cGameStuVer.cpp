@@ -72,7 +72,7 @@ void cGame::initialise(SDL_Window* theSDLWND, SDL_Renderer* theRenderer)
 	gameTextList = { "Asteroids", "Score : ", "Instructions: Use Arrow Keys", "Score 2:"};
 	strScore = gameTextList[1];
 	strScore += to_string(theScore).c_str();
-	strtScore2 = gameTextList[3];
+	strScore2 = gameTextList[3];
 	strScore2 += to_string(theScore2).c_str();
 	
 	theTextureMgr->addTexture("Title", theFontMgr->getFont("spaceAge")->createTextTexture(theRenderer, gameTextList[0], textType::solid, { 0, 255, 0, 255 }, { 0, 0, 0, 0 }));

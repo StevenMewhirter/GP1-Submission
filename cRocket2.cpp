@@ -4,16 +4,16 @@ cRocket.cpp
 - Header file for class definition - IMPLEMENTATION
 =================
 */
-#include "cRocket2.h"
+#include "cRocket.h"
 
 /*
 =================================================================
 Defualt Constructor
 =================================================================
 */
-cRocket2::cRocket2() : cSprite()
+cRocket::cRocket() : cSprite()
 {
-	this->rocketVelocity2 = 0;
+	this->rocketVelocity = 0;
 }
 /*
 =================================================================
@@ -21,20 +21,20 @@ Update the sprite position
 =================================================================
 */
 
-void cRocket2::update(double deltaTime)
+void cRocket::update(double deltaTime)
 {
 	auto rads = PI / 180.0f * (this->getSpriteRotAngle() - 90.0f);
 
-	/*FPoint direction = { 0.0f, 0.0f };
+	FPoint direction = { 0.0f, 0.0f };
 	direction.X = (float)(cos(rads));
-	direction.Y = (float)(sin(rads));*/
+	direction.Y = (float)(sin(rads));
 
 	SDL_Rect currentSpritePos = this->getSpritePos();
+	
+	currentSpritePos.x += (int)(this->rocketVelocity * direction.X * this->move * deltaTime);
+	currentSpritePos.y -= (int)(this->rocketVelocity * direction.Y * this->move * deltaTime);
 
-	//currentSpritePos.x += (int)(this->rocketVelocity * direction.X * this->move * deltaTime);
-	currentSpritePos.y += (int)(this->rocketVelocity2 * this->move2 * deltaTime);
-
-	this->setSpritePos({ currentSpritePos.x , currentSpritePos.y });
+	this->setSpritePos({ currentSpritePos.x , currentSpritePos.y  });
 	this->setBoundingRect(this->getSpritePos());
 
 }
@@ -43,34 +43,34 @@ void cRocket2::update(double deltaTime)
 Sets the velocity for the rocket
 =================================================================
 */
-void cRocket2::setRocketVelocity2(int rocketVel2)
+void cRocket::setRocketVelocity(int rocketVel)
 {
-	rocketVelocity2 = rocketVel2;
+	rocketVelocity = rocketVel;
 }
 /*
 =================================================================
 Gets the rocket velocity
 =================================================================
 */
-int cRocket2::getRocketVelocity2()
+int cRocket::getRocketVelocity()
 {
-	return rocketVelocity2;
+	return rocketVelocity;
 }
 /*
 =================================================================
 Sets the move value for the rocket
 =================================================================
 */
-void cRocket2::setRocketMove2(int rocketMove2)
+void cRocket::setRocketMove(int rocketMove)
 {
-	move2 = rocketMove2;
+	move = rocketMove;
 }
 /*
 =================================================================
 Gets the rocket move value
 =================================================================
 */
-int cRocket2::getRocketMove2()
+int cRocket::getRocketMove()
 {
-	return move2;
+	return move;
 }
