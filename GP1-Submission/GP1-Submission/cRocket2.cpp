@@ -1,6 +1,6 @@
 /*
 =================
-cRocket.cpp
+cRocket2.cpp
 - Header file for class definition - IMPLEMENTATION
 =================
 */
@@ -32,7 +32,7 @@ void cRocket2::update(double deltaTime)
 	SDL_Rect currentSpritePos = this->getSpritePos();
 	
 	//currentSpritePos.x += (int)(this->rocketVelocity * direction.X * this->move * deltaTime);
-	currentSpritePos.y += (int)(this->rocketVelocity * this->move * deltaTime);
+	currentSpritePos.y += (int)(this->rocketVelocity2 * this->move2 * deltaTime);
 
 	this->setSpritePos({ currentSpritePos.x , currentSpritePos.y  });
 	this->setBoundingRect(this->getSpritePos());
@@ -45,7 +45,7 @@ Sets the velocity for the rocket
 */
 void cRocket2::setRocketVelocity2(int rocketVel2)
 {
-	rocketVelocity = rocketVel2;
+	rocketVelocity2 = rocketVel2;
 }
 /*
 =================================================================

@@ -12,8 +12,8 @@ cRocket2.h
 class cRocket2 : public cSprite
 {
 private:
-	int rocketVelocity;
-	int move;
+	int rocketVelocity2;
+	int move2;
 
 public:
 	cRocket2();
