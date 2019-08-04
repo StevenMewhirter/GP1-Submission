@@ -10,7 +10,7 @@ cRocket2.h
 #include "cSprite.h"
 
 
-class cRocket2 : public cSprite
+class cRocket2: public cSprite
 {
 private:
 	int rocketVelocity2;

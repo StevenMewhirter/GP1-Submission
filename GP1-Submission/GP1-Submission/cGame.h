@@ -44,7 +44,7 @@ private:
 	// Sprites for displaying background and rocket textures
 	cSprite spriteBkgd;
 	cRocket theRocket;
-	cRocket2 theRocket2;
+	
 	cAsteroid theAsteroid;
 	cBullet theBullet;
 	// game related variables
