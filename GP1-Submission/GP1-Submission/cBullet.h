@@ -14,11 +14,13 @@ class cBullet : public cSprite
 {
 private:
 	int bulletVelocity;
+	
 
 public:
 	cBullet();
 	void update(double deltaTime);		// Bullet update method
 	void setBulletVelocity(int bulletVel);   // Sets the velocity for the Bullet
 	int getBulletVelocity();				 // Gets the Bullet velocity
+					
 };
 #endif
