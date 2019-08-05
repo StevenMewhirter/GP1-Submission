@@ -183,6 +183,13 @@ void cGame::render(SDL_Window* theSDLWND, SDL_Renderer* theRenderer)
 	pos = { 10, 10, tempTextTexture->getTextureRect().w, tempTextTexture->getTextureRect().h };
 	tempTextTexture->renderTexture(theRenderer, tempTextTexture->getTexture(), &tempTextTexture->getTextureRect(), &pos, scale);
 
+	if (updateScore2)
+	{
+		theTextureMgr->deleteTexture("theScore2");
+		theTextureMgr->addTexture("theScore2", theFontMgr->getFont("spaceAge")->createTextTexture(theRenderer, strScore.c_str(), textType::solid, { 0, 255, 0, 255 }, { 0, 0, 0, 0 }));
+		updateScore2 = false;
+	}
+
 	tempTextTexture = theTextureMgr->getTexture("theScore2");
 	pos = { 870, 10, tempTextTexture->getTextureRect().w, tempTextTexture->getTextureRect().h };
 	tempTextTexture->renderTexture(theRenderer, tempTextTexture->getTexture(), &tempTextTexture->getTextureRect(), &pos, scale);
@@ -243,6 +250,13 @@ void cGame::update(double deltaTime)
 	{
 		theBullet.setSpritePos({ theBullet.getSpritePos().x,theBullet.getSpritePos().y });
 		theBullet.setBulletMove(theBullet.getBulletMove()*(-1));
+	}
+	if (theBullet.getSpritePos().x <= 0)
+	{
+		theScore2 += 1;
+		strScore2 = gameTextList[3];
+		strScore2 += to_string(theScore2).c_str();
+		updateScore2 = true;
 	}
 	// Update the visibility and position of each asteriod
 	/*vector<cAsteroid*>::iterator asteroidIterator = theAsteroids.begin();
@@ -335,7 +349,7 @@ void cGame::update(double deltaTime)
 //			updateScore = true;
 /*theScore2 += 1;
 strScore2 = gameTextList[3];
-strScore2 += to_string(theScore).c_str();
+strScore2 += to_string(theScore2).c_str();
 updateScore2 = true;*/
 
 bool cGame::getInput(bool theLoop)

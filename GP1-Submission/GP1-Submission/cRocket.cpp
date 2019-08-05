@@ -23,15 +23,11 @@ Update the sprite position
 
 void cRocket::update(double deltaTime)
 {
-	auto rads = PI / 180.0f * (this->getSpriteRotAngle() - 90.0f);
-
-	/*FPoint direction = { 0.0f, 0.0f };
-	direction.X = (float)(cos(rads));
-	direction.Y = (float)(sin(rads));*/
-
+	
+	//gets players 1 current position and then moves them per frame 
 	SDL_Rect currentSpritePos = this->getSpritePos();
 	
-	//currentSpritePos.x += (int)(this->rocketVelocity * direction.X * this->move * deltaTime);
+	
 	currentSpritePos.y += (int)(this->rocketVelocity * this->move * deltaTime);
 
 	this->setSpritePos({ currentSpritePos.x , currentSpritePos.y  });

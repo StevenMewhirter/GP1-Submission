@@ -28,44 +28,31 @@ void cBullet::update(double deltaTime)
 	/*FPoint direction = { 0.0f, 0.0f };
 	direction.X = (float)(cos(rads));
 	direction.Y = (float)(sin(rads));*/
-	this->setSpriteRotAngle((float)(this->getSpriteRotAngle() + (9.0f * deltaTime)));
-	if (this->getSpriteRotAngle() > 360)
-	{
-		this->setSpriteRotAngle(this->getSpriteRotAngle() - 360.0f);
-	}
+	//this->setSpriteRotAngle((float)(this->getSpriteRotAngle() + (9.0f * deltaTime)));
+	//if (this->getSpriteRotAngle() > 360)
+	//{
+	//	this->setSpriteRotAngle(this->getSpriteRotAngle() - 360.0f);
+	//}
 
-	SDL_Rect currentSpritePos = this->getSpritePos();
+	//SDL_Rect currentSpritePos = this->getSpritePos();
 
-	currentSpritePos.x += (int)(this->bulletVelocity /** direction.X*/ * this->move3 * deltaTime);
-	currentSpritePos.y += (int)(this->bulletVelocity /** direction.Y*/ * this->move3 * deltaTime);
+	//currentSpritePos.x += (int)(this->bulletVelocity /** direction.X*/ * this->move3 * deltaTime);
+	//currentSpritePos.y += (int)(this->bulletVelocity /** direction.Y*/ * this->move3 * deltaTime);
 
-	this->setSpritePos({ currentSpritePos.x , currentSpritePos.y });
-	this->setBoundingRect(this->getSpritePos());
-	/*auto rads = PI / 180.0f * this->getSpriteRotAngle();
-
-	FPoint direction = { 0.0f, 0.0f };
-	direction.X = (float)(cos(rads));
-	direction.Y = (float)(sin(rads));
-
-	SDL_Rect currentSpritePos = this->getSpritePos();
-	currentSpritePos.x += (int)(direction.X * this->bulletVelocity * this->getSpriteTranslation().x * deltaTime);
-	currentSpritePos.y += (int)(direction.Y * this->bulletVelocity * this->getSpriteTranslation().y * deltaTime);
-
-	this->setSpritePos({ currentSpritePos.x, currentSpritePos.y });
-
-	this->setBoundingRect(this->getSpritePos());*/
+	//this->setSpritePos({ currentSpritePos.x , currentSpritePos.y });
+	//this->setBoundingRect(this->getSpritePos());
 	/*this->setSpriteRotAngle((float)(this->getSpriteRotAngle() + (5.0f * deltaTime)));
 	if (this->getSpriteRotAngle() > 360)
 	{
 		this->setSpriteRotAngle(this->getSpriteRotAngle() - 360.0f);
-	}
-
+	}*/
+	auto rads = PI / 180.0f * (this->getSpriteRotAngle() - 90.0f);
 	SDL_Rect currentSpritePos = this->getSpritePos();
 	currentSpritePos.x += (int)(this->getSpriteTranslation().x * deltaTime);
-	currentSpritePos.y -= (int)(this->getSpriteTranslation().y * deltaTime);
+	//currentSpritePos.y -= (int)(this->getSpriteTranslation().y * deltaTime);
 
 	this->setSpritePos({ currentSpritePos.x, currentSpritePos.y });
-	this->setBoundingRect(this->getSpritePos());*/
+	this->setBoundingRect(this->getSpritePos());
 
 }
 /*
