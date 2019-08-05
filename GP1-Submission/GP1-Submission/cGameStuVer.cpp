@@ -58,8 +58,8 @@ void cGame::initialise(SDL_Window* theSDLWND, SDL_Renderer* theRenderer)
 	theScore = 0;
 
 	// Store the textures
-	textureName = { "asteroid1", /*"asteroid2", "asteroid3", "asteroid4",*/ "photon","theRocket", "theBackground", "explosion"};
-	texturesToUse = { "Images\\Sprites\\asteroid1.png", /*"Images\\Sprites\\asteroid2.png", "Images\\Sprites\\asteroid3.png", "Images\\Sprites\\asteroid4.png",*/ "Images\\Sprites\\Photon64x32.png", "Images\\Sprites\\rocketSprite.png", "Images\\Bkg\\Pong.png", "Images\\Sprites\\explosion.png" };
+	textureName = { "bat1", /*"asteroid2", "asteroid3", "asteroid4",*/ "photon","theRocket", "theBackground", "explosion"};
+	texturesToUse = { "Images\\Bkg\\Bat1.png", /*"Images\\Sprites\\asteroid2.png", "Images\\Sprites\\asteroid3.png", "Images\\Sprites\\asteroid4.png",*/ "Images\\Sprites\\Photon64x32.png", "Images\\Sprites\\rocketSprite.png", "Images\\Bkg\\Pong.png", "Images\\Sprites\\explosion.png" };
 	for (int tCount = 0; tCount < (int)textureName.size(); tCount++)
 	{	
 		theTextureMgr->addTexture(textureName[tCount], texturesToUse[tCount]);

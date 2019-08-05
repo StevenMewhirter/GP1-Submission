@@ -23,16 +23,21 @@ Update the sprite position
 
 void cBullet::update(double deltaTime)
 {
-	auto rads = PI / 180.0f * (this->getSpriteRotAngle() - 90.0f);
+	//auto rads = PI / 180.0f * (this->getSpriteRotAngle() - 90.0f);
 
-	FPoint direction = { 0.0f, 0.0f };
+	/*FPoint direction = { 0.0f, 0.0f };
 	direction.X = (float)(cos(rads));
-	direction.Y = (float)(sin(rads));
+	direction.Y = (float)(sin(rads));*/
+	this->setSpriteRotAngle((float)(this->getSpriteRotAngle() + (9.0f * deltaTime)));
+	if (this->getSpriteRotAngle() > 360)
+	{
+		this->setSpriteRotAngle(this->getSpriteRotAngle() - 360.0f);
+	}
 
 	SDL_Rect currentSpritePos = this->getSpritePos();
 
-	currentSpritePos.x += (int)(this->bulletVelocity * direction.X * this->move3 * deltaTime);
-	currentSpritePos.y += (int)(this->bulletVelocity * direction.Y * this->move3 * deltaTime);
+	currentSpritePos.x += (int)(this->bulletVelocity /** direction.X*/ * this->move3 * deltaTime);
+	currentSpritePos.y += (int)(this->bulletVelocity /** direction.Y*/ * this->move3 * deltaTime);
 
 	this->setSpritePos({ currentSpritePos.x , currentSpritePos.y });
 	this->setBoundingRect(this->getSpritePos());

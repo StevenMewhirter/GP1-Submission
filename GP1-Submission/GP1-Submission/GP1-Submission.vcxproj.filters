@@ -112,6 +112,12 @@
     <Image Include="Images\Bkg\Pong1.png">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="Images\Bkg\Bat1.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\..\Images\Bkg\Bat2.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <Media Include="..\..\..\..\..\Desktop\Hit.wav">
