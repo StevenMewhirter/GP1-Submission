@@ -113,4 +113,9 @@
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>
+  <ItemGroup>
+    <Media Include="..\..\..\..\..\Desktop\Hit.wav">
+      <Filter>Resource Files</Filter>
+    </Media>
+  </ItemGroup>
 </Project>

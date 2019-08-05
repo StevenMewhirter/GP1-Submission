@@ -85,7 +85,7 @@ void cGame::initialise(SDL_Window* theSDLWND, SDL_Renderer* theRenderer)
 // Load game sounds
 soundList = { "theme", "shot", "explosion" };
 soundTypes = { soundType::music, soundType::sfx, soundType::sfx };
-soundsToUse = { "Audio/who10Edit.wav", "Audio/shot007.wav", "Audio/explosion2.wav" };
+soundsToUse = { "Audio/who10Edit.wav", "Audio/shot007.wav", "Audio/Hit.wav" };
 for (int sounds = 0; sounds < (int)soundList.size(); sounds++)
 {
 	theSoundMgr->add(soundList[sounds], soundsToUse[sounds], soundTypes[sounds]);
@@ -109,8 +109,8 @@ theRocket.setSpriteTranslation({ 0,50 });
 for (int astro = 0; astro < 1; astro++)
 {
 	theAsteroids.push_back(new cAsteroid);
-	theAsteroids[astro]->setSpritePos({ 100 * AsteroidDis(gen), 50 * AsteroidDis(gen) });
-	theAsteroids[astro]->setSpriteTranslation({ 100, -50 });
+	theAsteroids[astro]->setSpritePos({ (850 * (astro + 1) + (50 * astro)), -75  });
+	theAsteroids[astro]->setSpriteTranslation({ 0, -300 });
 	int randAsteroid = AsteroidTextDis(gen);
 	theAsteroids[astro]->setTexture(theTextureMgr->getTexture(textureName[randAsteroid]));
 	theAsteroids[astro]->setSpriteDimensions(theTextureMgr->getTexture(textureName[randAsteroid])->getTWidth(), theTextureMgr->getTexture(textureName[randAsteroid])->getTHeight());
@@ -202,16 +202,7 @@ void cGame::update(double deltaTime)
 		theRocket.setSpritePos({ theRocket.getSpritePos().x,theRocket.getSpritePos().y });
 		theRocket.setRocketMove(theRocket.getRocketMove()*(-1));
 	}
-	if (theBullet.getSpritePos().x <= 0 || theBullet.getSpritePos().x > (WINDOW_WIDTH - theBullet.getSpriteDimensions().w))
-	{
-		theBullet.setSpritePos({ theBullet.getSpritePos().x, theBullet.getSpritePos().y });
-		theBullet.setBulletVelocity(theBullet.getBulletVelocity()*(-1));
-	}
-	else if (theBullet.getSpritePos().y <= 0 || theBullet.getSpritePos().y > (WINDOW_HEIGHT - theBullet.getSpriteDimensions().h))
-	{
-		theBullet.setSpritePos({ theBullet.getSpritePos().x,theBullet.getSpritePos().y });
-		theBullet.setBulletVelocity(theBullet.getBulletVelocity()*(-1));
-	}
+	
 	// Update the visibility and position of each asteriod
 	vector<cAsteroid*>::iterator asteroidIterator = theAsteroids.begin();
 	while (asteroidIterator != theAsteroids.end())
@@ -279,12 +270,14 @@ void cGame::update(double deltaTime)
 				theExplosions[index]->setSpriteDimensions(theTextureMgr->getTexture("explosion")->getTWidth()/ theExplosions[index]->getNoFrames(), theTextureMgr->getTexture("explosion")->getTHeight());
 				theExplosions[index]->setSpritePos({ (*asteroidIterator)->getSpritePos().x + (int)((*asteroidIterator)->getSpritePos().w/2), (*asteroidIterator)->getSpritePos().y + (int)((*asteroidIterator)->getSpritePos().h / 2) });
 
+		
 				theSoundMgr->getSnd("explosion")->play(0);
-				theScore += 1;
+
+			/*	theScore += 1;
 				strScore = gameTextList[1];
 				strScore += to_string(theScore).c_str();
 				updateScore = true;
-				
+				*/
 				
 				
 			}
@@ -294,7 +287,7 @@ void cGame::update(double deltaTime)
 
 	// Update the Rockets position
 	theRocket.update(deltaTime);
-	theRocket2.update(deltaTime);
+	
 }
 
 bool cGame::getInput(bool theLoop)
