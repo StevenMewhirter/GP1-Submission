@@ -103,11 +103,17 @@ theRocket.setSpriteDimensions(theTextureMgr->getTexture("theRocket")->getTWidth(
 theRocket.setRocketVelocity(100);
 theRocket.setSpriteTranslation({ 0,50 });
 
-theAsteroid.setSpritePos({ 700,300 });
+theAsteroid.setSpritePos({ 850,300 });
 theAsteroid.setTexture(theTextureMgr->getTexture("theRocket"));
 theAsteroid.setSpriteDimensions(theTextureMgr->getTexture("theRocket")->getTWidth(), theTextureMgr->getTexture("theRocket")->getTHeight());
 theAsteroid.setAsteroidVelocity(100);
 theAsteroid.setSpriteTranslation({ 0,50 });
+
+theBullet.setSpritePos({ 500,300 });
+theBullet.setTexture(theTextureMgr->getTexture("photon"));
+theBullet.setSpriteDimensions(theTextureMgr->getTexture("photon")->getTWidth(), theTextureMgr->getTexture("photon")->getTHeight());
+theBullet.setBulletVelocity(300);
+theBullet.setSpriteTranslation({ 200,150 });
 
 
 // Create vector array of textures
@@ -151,10 +157,10 @@ void cGame::render(SDL_Window* theSDLWND, SDL_Renderer* theRenderer)
 		theAsteroids[draw]->render(theRenderer, &theAsteroids[draw]->getSpriteDimensions(), &theAsteroids[draw]->getSpritePos(), theAsteroids[draw]->getSpriteRotAngle(), &theAsteroids[draw]->getSpriteCentre(), theAsteroids[draw]->getSpriteScale());
 	}*/
 	// Render each bullet in the vector array
-	for (int draw = 0; draw < (int)theBullets.size(); draw++)
+	/*for (int draw = 0; draw < (int)theBullets.size(); draw++)
 	{
 		theBullets[draw]->render(theRenderer, &theBullets[draw]->getSpriteDimensions(), &theBullets[draw]->getSpritePos(), theBullets[draw]->getSpriteRotAngle(), &theBullets[draw]->getSpriteCentre(), theBullets[draw]->getSpriteScale());
-	}
+	}*/
 	// Render each explosion in the vector array
 	for (int draw = 0; draw < (int)theExplosions.size(); draw++)
 	{
@@ -180,10 +186,11 @@ void cGame::render(SDL_Window* theSDLWND, SDL_Renderer* theRenderer)
 	pos = { 100, 700, tempTextTexture->getTextureRect().w, tempTextTexture->getTextureRect().h };
 	tempTextTexture->renderTexture(theRenderer, tempTextTexture->getTexture(), &tempTextTexture->getTextureRect(), &pos, scale);
 	// render the rocket
-	theRocket.render(theRenderer, &theRocket.getSpriteDimensions(), &theRocket.getSpritePos(), theRocket.getSpriteRotAngle(), &theRocket.getSpriteCentre(), theRocket.getSpriteScale());
-	SDL_RenderPresent(theRenderer);
 	theAsteroid.render(theRenderer, &theAsteroid.getSpriteDimensions(), &theAsteroid.getSpritePos(), theAsteroid.getSpriteRotAngle(), &theAsteroid.getSpriteCentre(), theAsteroid.getSpriteScale());
+	theRocket.render(theRenderer, &theRocket.getSpriteDimensions(), &theRocket.getSpritePos(), theRocket.getSpriteRotAngle(), &theRocket.getSpriteCentre(), theRocket.getSpriteScale());
+	theBullet.render(theRenderer, &theBullet.getSpriteDimensions(), &theBullet.getSpritePos(), theBullet.getSpriteRotAngle(), &theBullet.getSpriteCentre(), theBullet.getSpriteScale());
 	SDL_RenderPresent(theRenderer);
+	
 }
 
 void cGame::render(SDL_Window* theSDLWND, SDL_Renderer* theRenderer, double rotAngle, SDL_Point* spriteCentre)
@@ -221,6 +228,16 @@ void cGame::update(double deltaTime)
 		theAsteroid.setSpritePos({ theAsteroid.getSpritePos().x,theAsteroid.getSpritePos().y });
 		theAsteroid.setAsteroidMove(theAsteroid.getAsteroidMove()*(-1));
 	}
+	if (theBullet.getSpritePos().x <= 0 || theBullet.getSpritePos().x > (WINDOW_WIDTH - theBullet.getSpriteDimensions().w))
+	{
+		theBullet.setSpritePos({ theBullet.getSpritePos().x, theBullet.getSpritePos().y });
+		theBullet.setBulletMove(theBullet.getBulletMove()*(-1));
+	}
+	else if (theBullet.getSpritePos().y <= 0 || theBullet.getSpritePos().y > (WINDOW_HEIGHT - theBullet.getSpriteDimensions().h))
+	{
+		theBullet.setSpritePos({ theBullet.getSpritePos().x,theBullet.getSpritePos().y });
+		theBullet.setBulletMove(theBullet.getBulletMove()*(-1));
+	}
 	// Update the visibility and position of each asteriod
 	/*vector<cAsteroid*>::iterator asteroidIterator = theAsteroids.begin();
 	while (asteroidIterator != theAsteroids.end())
@@ -236,7 +253,7 @@ void cGame::update(double deltaTime)
 		}
 	}*/
 	// Update the visibility and position of each bullet
-	vector<cBullet*>::iterator bulletIterartor = theBullets.begin();
+	/*vector<cBullet*>::iterator bulletIterartor = theBullets.begin();
 	while (bulletIterartor != theBullets.end())
 	{
 		if ((*bulletIterartor)->isActive() == false)
@@ -248,7 +265,7 @@ void cGame::update(double deltaTime)
 			(*bulletIterartor)->update(deltaTime);
 			++bulletIterartor;
 		}
-	}
+	}*/
 	// Update the visibility and position of each explosion
 	vector<cSprite*>::iterator expIterartor = theExplosions.begin();
 	while (expIterartor != theExplosions.end())
@@ -306,6 +323,7 @@ void cGame::update(double deltaTime)
 	// Update the Rockets position
 	theRocket.update(deltaTime);
 	theAsteroid.update(deltaTime);
+	theBullet.update(deltaTime);
 	
 }
 
@@ -367,20 +385,20 @@ bool cGame::getInput(bool theLoop)
 					theRocket.setRocketMove(-1);
 				}
 				break;
-				case SDLK_RIGHT:
+				case SDLK_w:
 				{
 					theAsteroid.setAsteroidMove(-1);
 				}
 				break;
 
-				case SDLK_LEFT:
+				case SDLK_s:
 				{
 					theAsteroid.setAsteroidMove(1);
 				}
 				break;
 				case SDLK_SPACE:
 				{
-					theBullets.push_back(new cBullet);
+					/*theBullets.push_back(new cBullet);
 					int numBullets = theBullets.size() - 1;
 					theBullets[numBullets]->setSpritePos({ theRocket.getBoundingRect().x + theRocket.getSpriteCentre().x, theRocket.getBoundingRect().y + theRocket.getSpriteCentre().y });
 					theBullets[numBullets]->setSpriteTranslation({ 50, 50 });
@@ -389,7 +407,7 @@ bool cGame::getInput(bool theLoop)
 					theBullets[numBullets]->setBulletVelocity(50);
 					theBullets[numBullets]->setSpriteRotAngle(theRocket.getSpriteRotAngle());
 					theBullets[numBullets]->setActive(true);
-					cout << "Bullet added to Vector at position - x: " << theRocket.getBoundingRect().x << " y: " << theRocket.getBoundingRect().y << endl;
+					cout << "Bullet added to Vector at position - x: " << theRocket.getBoundingRect().x << " y: " << theRocket.getBoundingRect().y << endl;*/
 				}
 				theSoundMgr->getSnd("shot")->play(0);
 				break;

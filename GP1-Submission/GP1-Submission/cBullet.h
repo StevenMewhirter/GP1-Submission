@@ -14,6 +14,7 @@ class cBullet : public cSprite
 {
 private:
 	int bulletVelocity;
+	int move3;
 	
 
 public:
@@ -21,6 +22,8 @@ public:
 	void update(double deltaTime);		// Bullet update method
 	void setBulletVelocity(int bulletVel);   // Sets the velocity for the Bullet
 	int getBulletVelocity();				 // Gets the Bullet velocity
+	void setBulletMove(int bulletMove);   // Sets the rocket move Value
+	int getBulletMove();
 					
 };
 #endif

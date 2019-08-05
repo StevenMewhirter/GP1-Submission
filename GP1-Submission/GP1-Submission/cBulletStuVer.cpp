@@ -23,7 +23,20 @@ Update the sprite position
 
 void cBullet::update(double deltaTime)
 {
-	auto rads = PI / 180.0f * this->getSpriteRotAngle();
+	auto rads = PI / 180.0f * (this->getSpriteRotAngle() - 90.0f);
+
+	FPoint direction = { 1.0f, 1.0f };
+	direction.X = (float)(cos(rads));
+	direction.Y = (float)(sin(rads));
+
+	SDL_Rect currentSpritePos = this->getSpritePos();
+
+	currentSpritePos.x += (int)(this->bulletVelocity * direction.X * this->move3 * deltaTime);
+	currentSpritePos.y += (int)(this->bulletVelocity * direction.Y * this->move3 * deltaTime);
+
+	this->setSpritePos({ currentSpritePos.x , currentSpritePos.y });
+	this->setBoundingRect(this->getSpritePos());
+	/*auto rads = PI / 180.0f * this->getSpriteRotAngle();
 
 	FPoint direction = { 0.0f, 0.0f };
 	direction.X = (float)(cos(rads));
@@ -35,7 +48,19 @@ void cBullet::update(double deltaTime)
 
 	this->setSpritePos({ currentSpritePos.x, currentSpritePos.y });
 
-	this->setBoundingRect(this->getSpritePos());
+	this->setBoundingRect(this->getSpritePos());*/
+	/*this->setSpriteRotAngle((float)(this->getSpriteRotAngle() + (5.0f * deltaTime)));
+	if (this->getSpriteRotAngle() > 360)
+	{
+		this->setSpriteRotAngle(this->getSpriteRotAngle() - 360.0f);
+	}
+
+	SDL_Rect currentSpritePos = this->getSpritePos();
+	currentSpritePos.x += (int)(this->getSpriteTranslation().x * deltaTime);
+	currentSpritePos.y -= (int)(this->getSpriteTranslation().y * deltaTime);
+
+	this->setSpritePos({ currentSpritePos.x, currentSpritePos.y });
+	this->setBoundingRect(this->getSpritePos());*/
 
 }
 /*
@@ -55,4 +80,17 @@ void cBullet::setBulletVelocity(int bulletVel)
 int cBullet::getBulletVelocity()
 {
 	return this->bulletVelocity;
+}
+void cBullet::setBulletMove(int bulletMove)
+{
+	move3 = bulletMove;
+}
+/*
+=================================================================
+Gets the rocket move value
+=================================================================
+*/
+int cBullet::getBulletMove()
+{
+	return move3;
 }
