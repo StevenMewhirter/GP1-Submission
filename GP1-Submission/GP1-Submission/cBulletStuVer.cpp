@@ -25,7 +25,7 @@ void cBullet::update(double deltaTime)
 {
 	auto rads = PI / 180.0f * (this->getSpriteRotAngle() - 90.0f);
 
-	FPoint direction = { 1.0f, 1.0f };
+	FPoint direction = { 0.0f, 0.0f };
 	direction.X = (float)(cos(rads));
 	direction.Y = (float)(sin(rads));
 

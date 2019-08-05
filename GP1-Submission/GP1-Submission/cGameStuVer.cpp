@@ -71,7 +71,7 @@ void cGame::initialise(SDL_Window* theSDLWND, SDL_Renderer* theRenderer)
 	{
 		theFontMgr->addFont(fontList[fonts], fontsToUse[fonts], 36);
 	}
-	gameTextList = { "Asteroids", "Score : ", "Instructions: Use Arrow Keys", "Score 2:"};
+	gameTextList = { "Pong", "P1 : ", "Instructions: Use Arrow Keys", "P2 : "};
 	strScore = gameTextList[1];
 	strScore += to_string(theScore).c_str();
 	strScore2 = gameTextList[3];
@@ -79,7 +79,7 @@ void cGame::initialise(SDL_Window* theSDLWND, SDL_Renderer* theRenderer)
 	
 	theTextureMgr->addTexture("Title", theFontMgr->getFont("spaceAge")->createTextTexture(theRenderer, gameTextList[0], textType::solid, { 0, 255, 0, 255 }, { 0, 0, 0, 0 }));
 	theTextureMgr->addTexture("theScore", theFontMgr->getFont("spaceAge")->createTextTexture(theRenderer, strScore.c_str(), textType::solid, { 0, 255, 0, 255 }, { 0, 0, 0, 0 }));
-	theTextureMgr->addTexture("theScore2", theFontMgr->getFont("spaceAge")->createTextTexture(theRenderer, strScore.c_str(), textType::solid, { 0, 255, 0, 255 }, { 0, 0, 0, 0 }));
+	theTextureMgr->addTexture("theScore2", theFontMgr->getFont("spaceAge")->createTextTexture(theRenderer, strScore2.c_str(), textType::solid, { 0, 255, 0, 255 }, { 0, 0, 0, 0 }));
 	theTextureMgr->addTexture("theInstructions", theFontMgr->getFont("spaceAge")->createTextTexture(theRenderer, gameTextList[2], textType::solid, { 0, 255, 0, 255 }, { 0, 0, 0, 0 }));
 
 // Load game sounds
@@ -168,7 +168,7 @@ void cGame::render(SDL_Window* theSDLWND, SDL_Renderer* theRenderer)
 	}
 	// Render the Title
 	cTexture* tempTextTexture = theTextureMgr->getTexture("Title");
-	SDL_Rect pos = { 10, 10, tempTextTexture->getTextureRect().w, tempTextTexture->getTextureRect().h };
+	SDL_Rect pos = { 413, 10, tempTextTexture->getTextureRect().w, tempTextTexture->getTextureRect().h };
 	FPoint scale = { 1, 1 };
 	tempTextTexture->renderTexture(theRenderer, tempTextTexture->getTexture(), &tempTextTexture->getTextureRect(), &pos, scale);
 	// Render updated score value
@@ -179,11 +179,15 @@ void cGame::render(SDL_Window* theSDLWND, SDL_Renderer* theRenderer)
 		updateScore = false;
 	}
 	tempTextTexture = theTextureMgr->getTexture("theScore");
-	pos = { 700, 10, tempTextTexture->getTextureRect().w, tempTextTexture->getTextureRect().h };
+	pos = { 10, 10, tempTextTexture->getTextureRect().w, tempTextTexture->getTextureRect().h };
+	tempTextTexture->renderTexture(theRenderer, tempTextTexture->getTexture(), &tempTextTexture->getTextureRect(), &pos, scale);
+
+	tempTextTexture = theTextureMgr->getTexture("theScore2");
+	pos = { 870, 10, tempTextTexture->getTextureRect().w, tempTextTexture->getTextureRect().h };
 	tempTextTexture->renderTexture(theRenderer, tempTextTexture->getTexture(), &tempTextTexture->getTextureRect(), &pos, scale);
 	//Render instructions
 	tempTextTexture = theTextureMgr->getTexture("theInstructions");
-	pos = { 100, 700, tempTextTexture->getTextureRect().w, tempTextTexture->getTextureRect().h };
+	pos = { 127, 700, tempTextTexture->getTextureRect().w, tempTextTexture->getTextureRect().h };
 	tempTextTexture->renderTexture(theRenderer, tempTextTexture->getTexture(), &tempTextTexture->getTextureRect(), &pos, scale);
 	// render the rocket
 	theAsteroid.render(theRenderer, &theAsteroid.getSpriteDimensions(), &theAsteroid.getSpritePos(), theAsteroid.getSpriteRotAngle(), &theAsteroid.getSpriteCentre(), theAsteroid.getSpriteScale());
