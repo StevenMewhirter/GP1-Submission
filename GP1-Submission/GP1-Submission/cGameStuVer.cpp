@@ -71,7 +71,7 @@ void cGame::initialise(SDL_Window* theSDLWND, SDL_Renderer* theRenderer)
 	{
 		theFontMgr->addFont(fontList[fonts], fontsToUse[fonts], 36);
 	}
-	gameTextList = { "Pong", "P1 : ", "Instructions: Use Arrow Keys", "P2 : "};
+	gameTextList = { "Pong", "P1 : ", "W and S  Up and Down", "P2 : " };
 	strScore = gameTextList[1];
 	strScore += to_string(theScore).c_str();
 	strScore2 = gameTextList[3];
@@ -81,11 +81,12 @@ void cGame::initialise(SDL_Window* theSDLWND, SDL_Renderer* theRenderer)
 	theTextureMgr->addTexture("theScore", theFontMgr->getFont("spaceAge")->createTextTexture(theRenderer, strScore.c_str(), textType::solid, { 0, 255, 0, 255 }, { 0, 0, 0, 0 }));
 	theTextureMgr->addTexture("theScore2", theFontMgr->getFont("spaceAge")->createTextTexture(theRenderer, strScore2.c_str(), textType::solid, { 0, 255, 0, 255 }, { 0, 0, 0, 0 }));
 	theTextureMgr->addTexture("theInstructions", theFontMgr->getFont("spaceAge")->createTextTexture(theRenderer, gameTextList[2], textType::solid, { 0, 255, 0, 255 }, { 0, 0, 0, 0 }));
+	
 
 // Load game sounds
 soundList = { "theme", "shot", "explosion" };
 soundTypes = { soundType::music, soundType::sfx, soundType::sfx };
-soundsToUse = { "Audio/who10Edit.wav", "Audio/shot007.wav", "Audio/explosion2.wav" };
+soundsToUse = { "Audio/who10Edit.wav", "Audio/Shot.wav", "Audio/explosion2.wav" };
 for (int sounds = 0; sounds < (int)soundList.size(); sounds++)
 {
 	theSoundMgr->add(soundList[sounds], soundsToUse[sounds], soundTypes[sounds]);
@@ -187,8 +188,9 @@ void cGame::render(SDL_Window* theSDLWND, SDL_Renderer* theRenderer)
 	tempTextTexture->renderTexture(theRenderer, tempTextTexture->getTexture(), &tempTextTexture->getTextureRect(), &pos, scale);
 	//Render instructions
 	tempTextTexture = theTextureMgr->getTexture("theInstructions");
-	pos = { 127, 700, tempTextTexture->getTextureRect().w, tempTextTexture->getTextureRect().h };
+	pos = { 270, 700, tempTextTexture->getTextureRect().w, tempTextTexture->getTextureRect().h };
 	tempTextTexture->renderTexture(theRenderer, tempTextTexture->getTexture(), &tempTextTexture->getTextureRect(), &pos, scale);
+	
 	// render the rocket
 	theAsteroid.render(theRenderer, &theAsteroid.getSpriteDimensions(), &theAsteroid.getSpritePos(), theAsteroid.getSpriteRotAngle(), &theAsteroid.getSpriteCentre(), theAsteroid.getSpriteScale());
 	theRocket.render(theRenderer, &theRocket.getSpriteDimensions(), &theRocket.getSpritePos(), theRocket.getSpriteRotAngle(), &theRocket.getSpriteCentre(), theRocket.getSpriteScale());
@@ -312,11 +314,7 @@ void cGame::update(double deltaTime)
 	//	
 	//			theSoundMgr->getSnd("explosion")->play(0);
 
-	//			theScore += 1;
-	//			strScore = gameTextList[1];
-	//			strScore += to_string(theScore).c_str();
-	//			updateScore = true;
-	//			
+	//		
 	//			
 	//			
 	//		}
@@ -330,6 +328,15 @@ void cGame::update(double deltaTime)
 	theBullet.update(deltaTime);
 	
 }
+//scores for player 1 and 2 to be added
+//theScore += 1;
+//			strScore = gameTextList[1];
+//			strScore += to_string(theScore).c_str();
+//			updateScore = true;
+/*theScore2 += 1;
+strScore2 = gameTextList[3];
+strScore2 += to_string(theScore).c_str();
+updateScore2 = true;*/
 
 bool cGame::getInput(bool theLoop)
 {
