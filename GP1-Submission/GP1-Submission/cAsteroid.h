@@ -13,11 +13,14 @@ class cAsteroid : public cSprite
 {
 private:
 	int asteroidVelocity;
+	int move2;
 
 public:
 	cAsteroid();
 	void update(double deltaTime);		// Rocket update method
 	void setAsteroidVelocity(int asteroidVel);   // Sets the velocity for the asteroid
-	int getAsteroidVelocity();				 // Gets the asteroid velocity
+	int getAsteroidVelocity();		
+	void setAsteroidMove(int asteroidMove);   // Sets the rocket move Value
+	int getAsteroidMove();				 // Gets the rocket move value// Gets the asteroid velocity
 };
 #endif

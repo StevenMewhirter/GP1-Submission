@@ -50,7 +50,7 @@ private:
 	vector<LPCSTR> textureName;
 	vector<LPCSTR> textName;
 	vector<LPCSTR> texturesToUse;
-	vector<cAsteroid*> theAsteroids;
+	//vector<cAsteroid*> theAsteroids;
 	vector<cBullet*> theBullets;
 	vector<cSprite*> theExplosions;
 	// Fonts to use
