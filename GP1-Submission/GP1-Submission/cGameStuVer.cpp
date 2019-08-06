@@ -59,7 +59,7 @@ void cGame::initialise(SDL_Window* theSDLWND, SDL_Renderer* theRenderer)
 
 	// Store the textures
 	textureName = { "bat1", /*"asteroid2", "asteroid3", "asteroid4",*/ "photon","theRocket", "theBackground", "explosion"};
-	texturesToUse = { "Images\\Bkg\\Bat1.png", /*"Images\\Sprites\\asteroid2.png", "Images\\Sprites\\asteroid3.png", "Images\\Sprites\\asteroid4.png",*/ "Images\\Sprites\\Photon64x32.png", "Images\\Sprites\\rocketSprite.png", "Images\\Bkg\\Pong.png", "Images\\Sprites\\explosion.png" };
+	texturesToUse = { "Images\\Sprites\\Player2.png", /*"Images\\Sprites\\asteroid2.png", "Images\\Sprites\\asteroid3.png", "Images\\Sprites\\asteroid4.png",*/ "Images\\Sprites\\Photon64x32.png", "Images\\Sprites\\rocketSprite.png", "Images\\Bkg\\Pong.png", "Images\\Sprites\\explosion.png" };
 	for (int tCount = 0; tCount < (int)textureName.size(); tCount++)
 	{	
 		theTextureMgr->addTexture(textureName[tCount], texturesToUse[tCount]);
@@ -99,8 +99,8 @@ spriteBkgd.setTexture(theTextureMgr->getTexture("theBackground"));
 spriteBkgd.setSpriteDimensions(theTextureMgr->getTexture("theBackground")->getTWidth(), theTextureMgr->getTexture("theBackground")->getTHeight());
 
 theRocket.setSpritePos({ 20, 300 });
-theRocket.setTexture(theTextureMgr->getTexture("theRocket"));
-theRocket.setSpriteDimensions(theTextureMgr->getTexture("theRocket")->getTWidth(), theTextureMgr->getTexture("theRocket")->getTHeight());
+theRocket.setTexture(theTextureMgr->getTexture("bat1"));
+theRocket.setSpriteDimensions(theTextureMgr->getTexture("bat1")->getTWidth(), theTextureMgr->getTexture("bat1")->getTHeight());
 theRocket.setRocketVelocity(100);
 theRocket.setSpriteTranslation({ 0,50 });
 
@@ -115,7 +115,7 @@ theBullet.setTexture(theTextureMgr->getTexture("photon"));
 theBullet.setSpriteDimensions(theTextureMgr->getTexture("photon")->getTWidth(), theTextureMgr->getTexture("photon")->getTHeight());
 theBullet.setBulletVelocity(300);
 theBullet.setSpriteTranslation({ 200,150 });
-
+//theBullet.setSpriteRotAngle(45.0f);
 
 // Create vector array of textures
 //
@@ -241,16 +241,7 @@ void cGame::update(double deltaTime)
 		theAsteroid.setSpritePos({ theAsteroid.getSpritePos().x,theAsteroid.getSpritePos().y });
 		theAsteroid.setAsteroidMove(theAsteroid.getAsteroidMove()*(-1));
 	}
-	if (theBullet.getSpritePos().x <= 0 || theBullet.getSpritePos().x > (WINDOW_WIDTH - theBullet.getSpriteDimensions().w))
-	{
-		theBullet.setSpritePos({ theBullet.getSpritePos().x, theBullet.getSpritePos().y });
-		theBullet.setBulletMove(theBullet.getBulletMove()*(-1));
-	}
-	else if (theBullet.getSpritePos().y <= 0 || theBullet.getSpritePos().y > (WINDOW_HEIGHT - theBullet.getSpriteDimensions().h))
-	{
-		theBullet.setSpritePos({ theBullet.getSpritePos().x,theBullet.getSpritePos().y });
-		theBullet.setBulletMove(theBullet.getBulletMove()*(-1));
-	}
+	
 	if (theBullet.getSpritePos().x <= 0)
 	{
 		theScore2 += 1;
