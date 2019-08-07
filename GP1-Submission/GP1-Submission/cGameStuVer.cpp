@@ -115,7 +115,7 @@ theBullet.setTexture(theTextureMgr->getTexture("photon"));
 theBullet.setSpriteDimensions(theTextureMgr->getTexture("photon")->getTWidth(), theTextureMgr->getTexture("photon")->getTHeight());
 theBullet.setBulletVelocity(300);
 theBullet.setSpriteTranslation({ 200,150 });
-//theBullet.setSpriteRotAngle(45.0f);
+theBullet.setSpriteRotAngle(45.0f);
 
 // Create vector array of textures
 //

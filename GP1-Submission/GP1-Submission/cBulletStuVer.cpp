@@ -52,33 +52,60 @@ void cBullet::update(double deltaTime)
 	currentSpritePos.x += (int)(this->getSpriteTranslation().x * direction.X * this->move3 * deltaTime);
 	currentSpritePos.y -= (int)(this->getSpriteTranslation().y * direction.Y * this->move3 * deltaTime);
 
-	if (currentSpritePos.x <= 0 )
+	if (currentSpritePos.x <= 0)
+
 	{
+
 		currentSpritePos.x += 15.0f;
-		this->move3 *= -1;
-		this->theAngle = 135.0f;
+
+		//this->move3 *= -1;
+
+		this->theAngle = 180.0f - theAngle;
+
 		//theBullet.setSpritePos({ theBullet.getSpritePos().x, theBullet.getSpritePos().y });
+
 		//theBullet.setBulletMove(theBullet.getBulletMove()*(-1));
+
 	}
+
 	else if (currentSpritePos.x > (WINDOW_WIDTH - this->getSpriteDimensions().w))
+
 	{
-		currentSpritePos.x -= (5.0f+ this->getSpriteDimensions().w);
-		this->move3 *= -1;
-		this->theAngle = 45.0f;
+
+		currentSpritePos.x -= (5.0f + this->getSpriteDimensions().w);
+
+		//this->move3 *= -1;
+
+		this->theAngle = 180.0f - theAngle;
+
 	}
-	if (currentSpritePos.y <= 0 )
+
+	if (currentSpritePos.y <= 0)
+
 	{
+
 		currentSpritePos.y += 15.0f;
-		this->move3 *= -1;
-		this->theAngle = 135.0f;
+
+		//this->move3 *= -1;
+
+		this->theAngle = 360.0f - theAngle;
+
 		//theBullet.setSpritePos({ theBullet.getSpritePos().x,theBullet.getSpritePos().y });
+
 		//theBullet.setBulletMove(theBullet.getBulletMove()*(-1));
+
 	}
-	else if(currentSpritePos.y > (WINDOW_HEIGHT - this->getSpriteDimensions().h))
+
+	else if (currentSpritePos.y > (WINDOW_HEIGHT - this->getSpriteDimensions().h))
+
 	{
+
 		currentSpritePos.y -= (5.0f + this->getSpriteDimensions().h);
-		this->move3 *= -1;
-		this->theAngle = 45.0f;
+
+		//this->move3 *= -1;
+
+		this->theAngle = 360.0f - theAngle;
+
 	}
 
 	this->setSpritePos({ currentSpritePos.x, currentSpritePos.y });
