@@ -16,6 +16,7 @@ cBullet::cBullet() : cSprite()
 {
 	this->bulletVelocity = 0;
 	this->theAngle = -45.0f;
+	this->hit = 'p';
 }
 /*
 =================================================================
@@ -58,6 +59,7 @@ void cBullet::update(double deltaTime)
 		currentSpritePos.x += 15.0f;
 	
 		this->theAngle = 180.0f - theAngle;
+		this->hit = 'l';
 	} 
 
 	else if (currentSpritePos.x > (WINDOW_WIDTH - this->getSpriteDimensions().w))
@@ -66,6 +68,7 @@ void cBullet::update(double deltaTime)
 		currentSpritePos.x -= (5.0f + this->getSpriteDimensions().w);
 		
 		this->theAngle = 180.0f - theAngle;
+		this->hit = 'r';
 	}
 
 	if (currentSpritePos.y <= 0)
@@ -99,7 +102,7 @@ void cBullet::update(double deltaTime)
 	
 	this->setSpritePos({ currentSpritePos.x, currentSpritePos.y });
 	this->setBoundingRect(this->getSpritePos());
-	cout << currentSpritePos.x << "," << currentSpritePos.y << endl;
+	//cout << currentSpritePos.x << "," << currentSpritePos.y << endl;
 }
 /*
 =================================================================
@@ -131,4 +134,12 @@ Gets the rocket move value
 int cBullet::getBulletMove()
 {
 	return move3;
+}
+void cBullet::setHit(char side)
+{
+	this->hit = side;
+}
+char cBullet::getHit()
+{
+	return this->hit;
 }

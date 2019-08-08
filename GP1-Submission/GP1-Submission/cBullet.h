@@ -16,6 +16,7 @@ private:
 	int bulletVelocity;
 	int move3 = 1;
 	float theAngle;
+	char hit;
 	
 
 public:
@@ -25,6 +26,8 @@ public:
 	int getBulletVelocity();				 // Gets the Bullet velocity
 	void setBulletMove(int bulletMove);   // Sets the rocket move Value
 	int getBulletMove();
-					
+	void setHit(char side); //set the bullet for collision with the wall to add score
+	char getHit();
+
 };
 #endif

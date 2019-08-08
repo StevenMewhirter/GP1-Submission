@@ -187,7 +187,7 @@ void cGame::render(SDL_Window* theSDLWND, SDL_Renderer* theRenderer)
 	if (updateScore2)
 	{
 		theTextureMgr->deleteTexture("theScore2");
-		theTextureMgr->addTexture("theScore2", theFontMgr->getFont("Game")->createTextTexture(theRenderer, strScore.c_str(), textType::solid, { 0, 255, 0, 255 }, { 0, 0, 0, 0 }));
+		theTextureMgr->addTexture("theScore2", theFontMgr->getFont("Game")->createTextTexture(theRenderer, strScore2.c_str(), textType::solid, { 0, 255, 0, 255 }, { 0, 0, 0, 0 }));
 		updateScore2 = false;
 	}
 
@@ -204,6 +204,8 @@ void cGame::render(SDL_Window* theSDLWND, SDL_Renderer* theRenderer)
 	theRocket.render(theRenderer, &theRocket.getSpriteDimensions(), &theRocket.getSpritePos(), theRocket.getSpriteRotAngle(), &theRocket.getSpriteCentre(), theRocket.getSpriteScale());
 	theBullet.render(theRenderer, &theBullet.getSpriteDimensions(), &theBullet.getSpritePos(), theBullet.getSpriteRotAngle(), &theBullet.getSpriteCentre(), theBullet.getSpriteScale());
 	SDL_RenderPresent(theRenderer);
+
+	
 	
 }
 
@@ -243,14 +245,36 @@ void cGame::update(double deltaTime)
 		theAsteroid.setAsteroidMove(theAsteroid.getAsteroidMove()*(-1));
 	}
 	
-	if (theBullet.getSpritePos().x > (WINDOW_WIDTH - theBullet.getSpriteDimensions().w))
+
+	if (theBullet.getSpritePos().x < (theRocket.getSpriteDimensions().w))
 	{
-		/*theBullet.setSpritePos({ theBullet.getSpritePos().x, theBullet.getSpritePos().y });
-		theBullet.getSpriteRotAngle();*/
+	printf("Collision");
+	theBullet.setBulletMove(theBullet.getBulletMove()*(-1));
+	theBullet.setSpriteRotAngle(45.0f);
+	}
+	else if (theBullet.getSpritePos().x < (theAsteroid.getSpriteDimensions().w))
+	{
+		printf("Collision");
+		theBullet.setBulletMove(theBullet.getBulletMove()*(-1));
+		theBullet.setSpriteRotAngle(45.0f);
+	}
+	if (theBullet.getHit() == 'r')
+	{
 		theScore += 1;
 		strScore = gameTextList[1];
-		strScore += to_string(theScore2).c_str();
+		strScore += 
+		to_string(theScore).c_str();
 		updateScore = true;
+		theBullet.setHit('p');
+	}
+	else if (theBullet.getHit() == 'l')
+	{
+		theScore2 += 1;
+		strScore2 = gameTextList[3];
+		strScore2 +=
+		to_string(theScore2).c_str();
+		updateScore2 = true;
+		theBullet.setHit('p');
 	}
 	/*if (theBullet.getSpr)
 	{
