@@ -118,6 +118,12 @@
     <Image Include="..\..\Images\Sprites\Player2.png">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="Images\Sprites\Player2.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Images\Sprites\Ball.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <Media Include="..\..\Audio\Shot.wav">

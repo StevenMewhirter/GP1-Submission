@@ -181,7 +181,9 @@ xcopy /Y "SDL2\SDL2_mixer-2.0.1\lib\x86\*.dll" "$(OutDir)"</Command>
     <Image Include="..\..\Images\Sprites\Player2.png" />
     <Image Include="Images\Bkg\Pong.png" />
     <Image Include="Images\Bkg\Pong1.png" />
+    <Image Include="Images\Sprites\Ball.png" />
     <Image Include="Images\Sprites\Player1.png" />
+    <Image Include="Images\Sprites\Player2.png" />
   </ItemGroup>
   <ItemGroup>
     <Media Include="..\..\Audio\Shot.wav" />
