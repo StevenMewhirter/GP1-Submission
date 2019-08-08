@@ -14,7 +14,7 @@ class cBullet : public cSprite
 {
 private:
 	int bulletVelocity;
-	int move3 = 3;
+	int move3 = 1;
 	float theAngle;
 	char hit;
 	
