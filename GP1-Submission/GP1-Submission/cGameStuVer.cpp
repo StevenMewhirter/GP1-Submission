@@ -252,11 +252,11 @@ void cGame::update(double deltaTime)
 	theBullet.setBulletMove(theBullet.getBulletMove()*(-1));
 	theBullet.setSpriteRotAngle(45.0f);
 	}
-	else if (theBullet.getSpritePos().x < (theAsteroid.getSpriteDimensions().w))
+	else if (theBullet.getSpritePos().x > (theAsteroid.getSpritePos().x))
 	{
 		printf("Collision");
 		theBullet.setBulletMove(theBullet.getBulletMove()*(-1));
-		theBullet.setSpriteRotAngle(45.0f);
+		theBullet.setSpriteRotAngle(185.0f);
 	}
 	if (theBullet.getHit() == 'r')
 	{
