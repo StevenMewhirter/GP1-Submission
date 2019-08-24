@@ -246,7 +246,7 @@ void cGame::update(double deltaTime)
 	}
 	
 
-	if (theBullet.getSpritePos().x < (theRocket.getSpriteDimensions().w))
+	/*if (theBullet.getSpritePos().x < (theRocket.getSpriteDimensions().w))
 	{
 	printf("Collision");
 	theBullet.setBulletMove(theBullet.getBulletMove()*(-1));
@@ -257,7 +257,7 @@ void cGame::update(double deltaTime)
 		printf("Collision");
 		theBullet.setBulletMove(theBullet.getBulletMove()*(-1));
 		theBullet.setSpriteRotAngle(185.0f);
-	}
+	}*/
 	if (theBullet.getHit() == 'r')
 	{
 		theScore += 1;
